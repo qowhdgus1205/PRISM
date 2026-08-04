@@ -1,0 +1,27 @@
+# PRISM experiment dependencies.
+# Pins reflect the environment the code was validated against; >= lets minor
+# updates through. Install with:  pip install -r requirements.txt
+
+# --- Core scientific stack ---
+numpy>=2.2,<3
+pandas>=2.3,<3
+pyarrow>=25,<26
+scipy>=1.15,<2
+scikit-learn>=1.7,<2
+xgboost>=3.3,<4
+lightgbm>=4.6,<5
+
+# --- Deep learning ---
+torch>=2.5,<3
+
+# --- Plotting / figures ---
+matplotlib>=3.10,<4
+tqdm>=4.67,<5
+
+# --- Excel I/O (pandas .xlsx reads, data_mendeley vendor scripts) ---
+openpyxl>=3.1,<4
+xlrd>=2.0,<3
+
+# --- Optional: FT-Transformer backbone (ENCODER_BACKBONE="ftt") ---
+# Only needed for the FTTransformerEncoder; safe to omit otherwise.
+tab-transformer-pytorch>=0.6,<1
