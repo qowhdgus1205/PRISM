@@ -21,7 +21,7 @@ PAPER_DATASETS="${MAIN_DATASETS} ${CASE1_DATASETS} ${CASE2_DATASETS}"
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/results/paper_cases}"
 
-cd "${REPO_ROOT}/code"
+cd "${REPO_ROOT}"
 
 needs_prepare=0
 for dataset in ${PAPER_DATASETS}; do
@@ -31,10 +31,10 @@ for dataset in ${PAPER_DATASETS}; do
   fi
 done
 if [ "${PREPARE_DATA}" = "1" ] || { [ "${PREPARE_DATA}" = "auto" ] && [ "${needs_prepare}" = "1" ]; }; then
-  python -u prepare_uci_external_datasets.py --datasets ${PAPER_DATASETS}
+  python -u scripts/prepare_datasets.py --datasets ${PAPER_DATASETS}
 fi
 
-python -u run_processed_data_experiments.py \
+python -u scripts/run_experiments.py \
   --datasets ${PAPER_DATASETS} \
   --models ${MODELS} \
   --seeds ${SEEDS} \
@@ -54,7 +54,7 @@ python -u run_processed_data_experiments.py \
   --device "${DEVICE}" \
   --output-dir "${OUTPUT_DIR}"
 
-python -u run_acp_recoverability_diagnostic.py \
+python -u scripts/run_acp_diagnostic.py \
   --datasets ${PAPER_DATASETS} \
   --models random_forest ridge \
   --primary-model random_forest \

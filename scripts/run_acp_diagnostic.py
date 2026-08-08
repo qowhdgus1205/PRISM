@@ -10,7 +10,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import numpy as np
 import pandas as pd
@@ -21,7 +26,7 @@ from sklearn.linear_model import RidgeCV
 
 from prism.encoder import build_role_model
 from prism.reproducibility import set_seed
-from run_processed_data_experiments import (
+from run_experiments import (
     DATASETS,
     encode_categorical_features,
     loader,
@@ -180,7 +185,7 @@ def write_markdown(agg, out_path: Path, primary_model: str):
     lines = [
         "# X-to-ACP Recoverability Diagnostic",
         "",
-        "This diagnostic measures whether deployable inputs X contain enough information to reconstruct privileged ACP variables. It is separate from target prediction: models are trained as X -> ACP and evaluated on the ACP test set using the same dataset preprocessing and split policy as `run_processed_data_experiments.py`.",
+        "This diagnostic measures whether deployable inputs X contain enough information to reconstruct privileged ACP variables. It is separate from target prediction: models are trained as X -> ACP and evaluated on the ACP test set using the same dataset preprocessing and split policy as `run_experiments.py`.",
         "",
         f"- Primary recoverability model in the tables below: `{primary_model}`.",
         "- `macro R2`: mean ACP-descriptor R2 across ACP dimensions; higher is better.",

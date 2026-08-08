@@ -18,11 +18,9 @@ Main, Case1, and Case2 evaluations. Every processed table has fewer than
 ## Repository layout
 
 ```text
-code/prism/       reusable models, losses, training, and analysis modules
-code/run_*.py     experiment entry points
-code/train_*.py   individual model-training entry points
-scripts/          repository-level orchestration and checks
-splits/           reproducible split definitions
+prism/            reusable models, losses, training, and analysis package
+scripts/*.py      dataset preparation, experiments, and diagnostics
+scripts/*.sh      paper orchestration and repository checks
 results/          generated reports and selected tracked paper artifacts
 data/processed/   13 publication-ready tables (clean public release only)
 ```
@@ -65,7 +63,7 @@ DEVICE=cpu bash scripts/run_paper_experiments.sh
 ```
 
 To prepare only a subset, pass explicit dataset names to
-`code/prepare_uci_external_datasets.py --datasets ...`. Generated outputs are
+`scripts/prepare_datasets.py --datasets ...`. Generated outputs are
 written below `results/paper_cases/`.
 
 ## Role convention
